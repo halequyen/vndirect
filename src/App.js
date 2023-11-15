@@ -1,18 +1,19 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { publicRoutes } from './routes';
 
 function App() {
-  const [counter, setCounter] = useState(1)
-  const handleIncrease = () => {
-    setCounter(counter + 1)
-  }
   return (
-    <div className="App">
-      <header>hi</header>
-      <h1>{counter}</h1>
-      <button onClick={handleIncrease}>Increase</button>
-      <footer>huhu</footer>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            return <Route key={index} path={route.path} element={<Page />}/>
+          })}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
